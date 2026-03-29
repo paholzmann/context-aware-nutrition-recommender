@@ -20,10 +20,16 @@ class Preprocessor:
         df["rating"] = df["rating"].astype(float)
         return df
     
-    
     def clean_data_types_recipes(self, df: pd.DataFrame) -> pd.DataFrame:
         df["id"] = df["id"].astype(int)
         df["contributor_id"] = df["contributor_id"].astype(int)
+        return df
+    
+    def clean_text(self, df: pd.DataFrame, cols_to_clean: list) -> pd.DataFrame:
+        for col in cols_to_clean:
+            df[col] = df[col].str.lower()
+            df[col] = df[col].str.replace(r"[^\w\s$€]", " ", regex=True)
+            df[col] = df[col].str.replace(r"\s+", " ", regex=True)
         return df
 
 # df_interactions = FileHandler().csv_to_df(filepath="data/raw/RAW_interactions.csv")
