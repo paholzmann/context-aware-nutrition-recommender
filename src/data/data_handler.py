@@ -1,6 +1,6 @@
 import pandas as pd
 
-from src.file_handler import FileHandler
+from src.data.file_handler import FileHandler
 
 
 class DataHandler:
@@ -15,7 +15,10 @@ class DataHandler:
         matches: id and recipe_id
         """
         return recipes_df.merge(interactions_df, left_on="id", right_on="recipe_id", how="inner")
+    
+    def match_recipe_id_with_name(self, df: pd.DataFrame) -> pd.DataFrame:
+        pass
 
-df_1 = FileHandler().csv_to_df(filepath="data/raw/RAW_recipes.csv")
-df_2 = FileHandler().csv_to_df(filepath="data/raw/RAW_interactions.csv")
-print(DataHandler().combine_recipes_and_interactions(df_1, df_2))
+# df_1 = FileHandler().csv_to_df(filepath="data/raw/RAW_recipes.csv")
+# df_2 = FileHandler().csv_to_df(filepath="data/raw/RAW_interactions.csv")
+# print(DataHandler().combine_recipes_and_interactions(df_1, df_2))
